@@ -60,11 +60,54 @@ public class basics {
         int fn=fnm1+fnm2;
         return fn;
     }
+
+    //check if array is sorted or not
+    public static boolean isSorted(int arr[],int i){//i is the starting point from where we
+        //are starting checking
+        if(i==arr.length-1){//base case for stoping recursive loop 
+            return true;
+        }
+        if(arr[i]>arr[i+1]){
+            return false;
+        }
+        return isSorted(arr, i+1);
+    }
+
+    //find the first occurence of an element in an array
+    public static int firrstOccurence(int arr[],int key,int i){
+        if(i==arr.length){
+            return -1;
+        }
+        if(arr[i]==key){
+            return i;
+        }
+        return firrstOccurence(arr, key, i+1);
+    }
+
+     //find the last occurence of an element in an array
+     public static int lastOccurence(int arr[],int key,int i){
+        if(i == arr.length){
+            return -1;
+        }
+        int isFound=lastOccurence(arr, key, i+1);
+        if(isFound == -1 && arr[i]==key){
+            return i;
+        }
+        return isFound;
+     }
     public static void main(String[] args) {
         printDec(10);
         printInc(1);
         System.out.println(fact(5));
         System.out.println(calcSum(5));
         System.out.println(fib(25));
+
+        int arr[]={1,2,3,4,5};
+        System.out.println(isSorted(arr, 0));
+
+        int arr1[]={8,3,6,9,5,10,2,5,3};
+        System.out.println(firrstOccurence(arr1, 5, 0));
+
+        System.out.println(lastOccurence(arr1, 5, 0));
     }
 }
