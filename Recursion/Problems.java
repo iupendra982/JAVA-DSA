@@ -31,10 +31,36 @@ public class Problems {
             removeDuplicates(str, idx+1, newStr.append(currChar), map);
         }
     }
+
+    //Friends Pairing Problem
+    public static int friendsPairing(int n){
+        if(n==1 || n==2){
+            return n;
+        }
+        //choice options
+        //single
+        int fnm1=friendsPairing(n-1);
+
+        //pair
+        int fnm2=friendsPairing(n-2);
+        int pairways=(n-1)*fnm2;
+
+        //total ways
+        int totWays=fnm1+pairways;
+        return totWays;
+
+        // //it can be also written in simple code as
+        // if(n==1 || n==2){
+        //     return n;
+        // }
+        // return friendsPairing(n-1)+(n-1)*friendsPairing(n-2);
+    }
     public static void main(String[] args) {
         System.out.println(tillingProblem(4));
 
         String str="appnnacollege";
         removeDuplicates(str, 0, new StringBuilder(""),new boolean[26]);
+
+        System.out.println(friendsPairing(3));
     }
 }
