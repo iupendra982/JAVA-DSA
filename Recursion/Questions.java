@@ -26,8 +26,22 @@ public class Questions {
     }
 
     //Write a program to find Length of a String using Recursion
-    public static void lengthOfStringRecursively(String str){
-        
+    public static void lengthOfStringRecursively(String str){   
+
+    }
+
+    //Tower of Hanoi Prroblem
+    public static void towerOfHanoi(int n,String src,String helper,String dest){
+        if(n==1){
+            System.out.println("Transfer disk "+n+" from "+src+" to "+dest);
+            return;
+        }
+        //transfer top n-1 from src to helper using dest as 'helper'
+        towerOfHanoi(n-1, src, dest, helper);
+        //transfer nth from source to dest
+        System.out.println("Transfer disk "+n+" from "+src+" to "+helper);
+        //transfer n-1 from helper to dest using src as 'helper'
+        towerOfHanoi(n-1, helper, src, dest);
     }
     public static void main(String[] args) {
         //recursive occurence
@@ -39,5 +53,9 @@ public class Questions {
         //print integers in string
         digitToStringConversion(1234);
         System.out.println();
+
+        //tower of hanoi
+        int n=4;
+        towerOfHanoi(n, "A", "B", "C");
     }
 }
