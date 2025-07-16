@@ -10,6 +10,60 @@ public class basic {
         l1.set(idx2, temp);
     }
 
+    //Container with most water problemm
+    public static int storeWater(ArrayList<Integer>height){
+        int maxWater=0;
+    // //bruteforce    T.C = O(n^2)
+    //     for(int i=0;i<height.size();i++){
+    //         for(int j=i+1;j<height.size();j++){
+    //             int ht=Math.min(height.get(i),height.get(j));
+    //             int width=j-i;
+    //             int currWater=ht*width;
+    //             maxWater=Math.max(maxWater, currWater);
+    //         }
+    //     }
+
+        //now will use 2 pointer approach   T.C-O(n)
+        int lp=0;
+        int rp=height.size()-1;
+
+        while(lp<rp){
+            int ht=Math.min(height.get(lp),height.get(rp));
+            int width=rp-lp;
+            int currWater=ht*width;
+            maxWater=Math.max(maxWater, currWater);
+
+            //update ptr
+            if(height.get(lp)<height.get(rp)){
+                lp++;
+            }else{
+                rp--;
+            }
+        }
+        
+        return maxWater;
+    }
+
+
+    //Pair sum Problem
+    public static boolean pairSum1(ArrayList<Integer>list,int target){
+        Collections.sort(list);
+        int lp=0;
+        int rp=list.size()-1;
+        while(lp!=rp){
+            int currSum=list.get(lp)+list.get(rp);
+            if(currSum==target){
+                return true;
+            }else if(currSum<target){
+                lp++;
+            }else{
+                rp--;
+            }
+        }
+        return false;
+    }
+
+
     public static void main(String[] args) {
         //ArrayList is a part of Java Collections Framework
         //ClassName objectName=neew ClassName();
@@ -90,5 +144,49 @@ public class basic {
         Collections.sort(list1,Collections.reverseOrder());//This will sort in descending
         System.out.println("Sorted list in descending order");
         System.out.println(list1);
+
+
+        //Multi dimenisonal arraylist
+        ArrayList<ArrayList<Integer>> mainList=new ArrayList<>();
+
+        ArrayList<Integer>l1=new ArrayList<>();
+        l1.add(1);
+        l1.add(2);
+        mainList.add(l1);
+
+        ArrayList<Integer>l2=new ArrayList<>();
+        l2.add(3);
+        l2.add(4);
+        mainList.add(l2);
+
+        System.out.println("mainList");
+        for(int i=0;i<mainList.size();i++){
+            ArrayList<Integer>currList=mainList.get(i);
+            for(int j=0;j<currList.size();j++){
+                System.out.print(currList.get(j)+" ");
+            }
+            System.out.println();
+        }
+        System.out.println(mainList);
+
+
+        //Container with most water Problem
+        //For given n lines on x-axis, use 2 lines to form a container such that it
+        //holds maximum water           height=[1,8,6,2,5,4,8,3,7]
+        ArrayList<Integer>height=new ArrayList<>();
+        height.add(1);
+        height.add(8);
+        height.add(6);
+        height.add(2);
+        height.add(5);
+        height.add(4);
+        height.add(8);
+        height.add(3);
+        height.add(7);
+        System.out.println(storeWater(height));
+
+
+        //Pair sum1 call
+        System.out.println(pairSum1(list1, 5));
     }
 }
