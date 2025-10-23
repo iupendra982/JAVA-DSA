@@ -45,7 +45,7 @@ public class basic {
     }
 
 
-    //Pair sum Problem
+    //Pair sum Problem for sorted list
     public static boolean pairSum1(ArrayList<Integer>list,int target){
         Collections.sort(list);
         int lp=0;
@@ -58,6 +58,34 @@ public class basic {
                 lp++;
             }else{
                 rp--;
+            }
+        }
+        return false;
+    }
+
+    //Pair Sum Problem 2 for sorted list with pivot rotated list 
+    //list =[11,15,6,8,9,10]
+    public static boolean pairSum2(ArrayList<Integer>list,int target){
+        int n=list.size();
+        int bp=-1;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i)>list.get(i+1)){
+                bp=i;
+                break;
+            }
+        }
+        int lp=bp+1;
+        int rp=bp;
+
+        while(lp!=rp){
+            int currSum=list.get(rp)+list.get(lp);
+            if(currSum==target){
+                return true;
+            }else if(currSum<target){
+                lp=(lp+1)%n;
+            }
+            else{
+                rp=(rp-1+n)%n;
             }
         }
         return false;
